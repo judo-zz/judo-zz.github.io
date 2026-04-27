@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <filter id="wiggle"><feTurbulence baseFrequency=".05" numOctaves="2" seed="15"/><feDisplacementMap in="SourceGraphic" scale="1.15"/></filter>
+  <g filter="url(#wiggle)" stroke="#32261f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M23 66c0-28 17-45 41-45s42 17 42 45c0 27-17 44-42 44-24 0-41-17-41-44z" fill="#ffd8a8"/>
+    <path d="M24 59c6-25 20-37 41-37 20 0 34 12 40 36-9-5-19-6-29-2-10 4-20 3-29 0-9-3-16-2-23 3z" fill="#3f342e"/>
+    <path d="M35 66h30v19H35zM67 66h30v19H67zM65 75h3" fill="#20252c"/>
+    <path d="M51 96c7 5 18 5 25 0" fill="none"/>
+    <path d="M42 106c8-9 17-9 26 0 9-9 18-9 26 0" fill="none" stroke="#49c6de"/>
+    <circle cx="39" cy="91" r="5" fill="#ff9289" stroke="none"/><circle cx="90" cy="91" r="5" fill="#ff9289" stroke="none"/>
+  </g>
+</svg>
