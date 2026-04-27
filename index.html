@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nagopine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e12;
+      --surface: #16161c;
+      --border: #2a2a36;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --accent: #c084fc;
+      --accent2: #38bdf8;
+      --accent3: #fb923c;
+      --green: #4ade80;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ヘッダー */
+    header {
+      padding: 80px 24px 60px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .site-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .site-desc {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 480px;
+    }
+
+    .site-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .site-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .site-links a:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* セクション */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    section { margin-bottom: 64px; }
+
+    .section-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* カードグリッド */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-emoji {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .card-status {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .status-live {
+      background: rgba(74, 222, 128, 0.12);
+      color: var(--green);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+    }
+
+    .status-wip {
+      background: rgba(251, 146, 60, 0.12);
+      color: var(--accent3);
+      border: 1px solid rgba(251, 146, 60, 0.25);
+    }
+
+    .status-tool {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent2);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: -4px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 8px;
+      transition: gap 0.2s;
+    }
+
+    .card-link:hover { gap: 10px; }
+
+    /* note一覧 */
+    .note-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .note-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .note-item:hover { border-color: var(--accent2); }
+
+    .note-item-inner { flex: 1; }
+
+    .note-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .note-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .note-arrow {
+      font-size: 16px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* フッター */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 48px 20px 40px; }
+      main { padding: 0 20px 60px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="site-name">nagopine</div>
+  <p class="site-desc">ゲーム、ツール、フィクションサイトをつくっています。</p>
+  <nav class="site-links">
+    <a href="https://github.com/judo-zz" target="_blank">GitHub</a>
+    <a href="https://note.com/" target="_blank">note</a>
+  </nav>
+</header>
+
+<main>
+
+  <section>
+    <div class="section-label">Games &amp; Interactive</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🎭</span>
+          <span class="card-status status-live">LIVE</span>
+        </div>
+        <div class="card-title">コンカフェ★メンタルウォーズ</div>
+        <div class="card-sub">concafegame</div>
+        <p class="card-desc">AIキャストとリアルタイムチャットで対話するビジュアルノベルゲーム。空気を読みながら接客の修羅場を生き残れ。</p>
+        <div class="card-tags">
+          <span class="tag">VN</span>
+          <span class="tag">AI</span>
+          <span class="tag">Claude API</span>
+        </div>
+        <a class="card-link" href="https://concafe-mental-wars.fly.dev/" target="_blank">プレイする →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🍸</span>
+          <span class="card-status status-live">LIVE</span>
+        </div>
+        <div class="card-title">テキーラから逃げろ！</div>
+        <div class="card-sub">tequila-escape</div>
+        <p class="card-desc">コンカフェで突然始まった乾杯タイムを、飲みすぎず・疑われすぎず・空気を守りながら10ターン生き残るコマンド選択型ゲーム。</p>
+        <div class="card-tags">
+          <span class="tag">ブラウザゲーム</span>
+          <span class="tag">コマンド選択</span>
+        </div>
+        <a class="card-link" href="https://github.com/judo-zz/tequila-escape" target="_blank">GitHubで見る →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">👴</span>
+          <span class="card-status status-wip">WIP</span>
+        </div>
+        <div class="card-title">逆コンカフェ★おじさん伝説</div>
+        <div class="card-sub">concafe-ojisan</div>
+        <p class="card-desc">今度はおじさん側。14日間の通い記録でキャストを攻略する長期戦ゲーム。でび・まりん・やぴの3キャスト対応。</p>
+        <div class="card-tags">
+          <span class="tag">VN</span>
+          <span class="tag">AI</span>
+          <span class="tag">開発中</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Fiction &amp; ARG</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🐉</span>
+          <span class="card-status status-live">LIVE</span>
+        </div>
+        <div class="card-title">CYBER CHINA ✦ 蟠龍閣</div>
+        <div class="card-sub">banryukaku</div>
+        <p class="card-desc">架空のネオ・オリエンタル コンカフェサイト。ただのHPを調べていたはずが、龍牌会の秘密に深く引き込まれていく謎解きARG。</p>
+        <div class="card-tags">
+          <span class="tag">ARG</span>
+          <span class="tag">フィクションサイト</span>
+          <span class="tag">謎解き</span>
+        </div>
+        <a class="card-link" href="https://judo-zz.github.io/banryukaku/" target="_blank">サイトへ →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Tools &amp; Apps</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🎡</span>
+          <span class="card-status status-tool">TOOL</span>
+        </div>
+        <div class="card-title">番組ルーレット</div>
+        <div class="card-sub">bangumiapp</div>
+        <p class="card-desc">オペレーター側で操作できるルーレットホイールアプリ。イベント演出用。</p>
+        <div class="card-tags">
+          <span class="tag">イベント</span>
+          <span class="tag">ルーレット</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🎴</span>
+          <span class="card-status status-tool">TOOL</span>
+        </div>
+        <div class="card-title">パネル画像当てクイズ</div>
+        <div class="card-sub">panel_quiz_app</div>
+        <p class="card-desc">2画面対応のオフラインクイズアプリ。管理者ウィンドウと観客ウィンドウを分けて運用できるイベント向けデスクトップアプリ。</p>
+        <div class="card-tags">
+          <span class="tag">イベント</span>
+          <span class="tag">オフライン</span>
+          <span class="tag">2画面</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Note</div>
+    <div class="note-list">
+      <a class="note-item" href="https://note.com/" target="_blank">
+        <div class="note-item-inner">
+          <div class="note-title">note.com で書いています</div>
+          <div class="note-meta">ゲーム制作・ARG・イベントの記録など</div>
+        </div>
+        <span class="note-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © nagopine — built with GitHub Pages
+</footer>
+
+</body>
+</html>
