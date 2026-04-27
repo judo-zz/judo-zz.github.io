@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <filter id="wiggle"><feTurbulence baseFrequency=".047" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="1.1"/></filter>
+  <g filter="url(#wiggle)" stroke="#32261f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 67c0-29 18-46 43-46s43 17 43 46c0 27-17 43-43 43-25 0-43-16-43-43z" fill="#ffd7a9"/>
+    <path d="M21 59c8-24 21-37 43-37s36 13 43 37c-8-5-17-6-28-3-12 4-21 3-31-1-10-4-19-2-27 4z" fill="#2f2b2b"/>
+    <path d="M41 69c7-4 15-4 22 0M66 69c7-4 15-4 22 0" fill="none"/>
+    <path d="M36 69h56v14H36z" fill="#2b2928"/>
+    <path d="M50 93c8 5 20 5 28 0" fill="none"/>
+    <path d="M78 23h30v21H78z" fill="#ffd84d"/>
+    <text x="83" y="39" font-family="Arial Rounded MT Bold, sans-serif" font-size="13" font-weight="900" fill="#32261f" stroke="none">VIP</text>
+    <circle cx="39" cy="88" r="5" fill="#ff938a" stroke="none"/><circle cx="89" cy="88" r="5" fill="#ff938a" stroke="none"/>
+  </g>
+</svg>
